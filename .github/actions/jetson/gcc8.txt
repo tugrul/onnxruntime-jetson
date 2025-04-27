@@ -1,0 +1,7 @@
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/gcc-8-base_8.4.0-3ubuntu2_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/main/i/isl/libisl22_0.22.1-1_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/libgcc-8-dev_8.4.0-3ubuntu2_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/cpp-8_8.4.0-3ubuntu2_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/gcc-8_8.4.0-3ubuntu2_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/libstdc++-8-dev_8.4.0-3ubuntu2_arm64.deb
+http://ports.ubuntu.com/ubuntu-ports/pool/universe/g/gcc-8/g++-8_8.4.0-3ubuntu2_arm64.deb

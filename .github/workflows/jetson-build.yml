@@ -1,0 +1,24 @@
+
+name: Build whl for Jetson (aarch64)
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04-arm
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Run container action
+        uses: ./.github/actions/jetson
+
+      - name: Upload binary to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ github.workspace }}/build-files/*
+
+
