@@ -1,0 +1,23 @@
+Package: gcc-8*
+Pin: release a=buster
+Pin-Priority: 990
+
+Package: g++-8*
+Pin: release a=buster
+Pin-Priority: 990
+
+Package: libgcc-8*
+Pin: release a=buster
+Pin-Priority: 990
+
+Package: libstdc++-8*
+Pin: release a=buster
+Pin-Priority: 990
+
+Package: libc6-dev
+Pin: release a=buster
+Pin-Priority: 990
+
+Package: libgcc-s1
+Pin: release a=buster
+Pin-Priority: 990

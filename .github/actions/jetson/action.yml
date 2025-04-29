@@ -4,4 +4,3 @@ description: "Build whl for Jetson Nano (aarch64)"
 runs:
   using: "docker"
   image: "Dockerfile"
-

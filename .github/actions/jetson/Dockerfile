@@ -3,17 +3,15 @@ FROM arm64v8/python:3.10-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential cmake ninja-build git curl wget unzip \
-    libprotobuf-dev protobuf-compiler libssl-dev libpython3-dev \
-    ccache gnupg2 libasan5 libtsan0
- 
-COPY gcc8.txt /gcc8.txt
-RUN mkdir gcc8-debs && wget -i /gcc8.txt -P gcc8-debs && apt install --fix-broken ./gcc8-debs/*.deb
+COPY entrypoint.sh /entrypoint.sh
+COPY gcc-8.pref /etc/apt/preferences.d/gcc-8
 
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100 \
+RUN chmod +x /entrypoint.sh && echo "deb http://deb.debian.org/debian buster main" >> /etc/apt/sources.list.d/buster.list && \
+apt-get update && apt-get install -y --no-install-recommends make cmake ninja-build git curl wget unzip \
+    libprotobuf-dev protobuf-compiler libssl-dev libpython3-dev apt-transport-https ccache gnupg ca-certificates \
+    lsb-release software-properties-common gcc-8 g++-8 libgcc-8-dev libstdc++-8-dev && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 100 \
-    && gcc --version && g++ --version
+    && gcc --version && g++ --version && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO - https://repo.download.nvidia.com/jetson/jetson-ota-public.asc | tee /etc/apt/trusted.gpg.d/jetson.asc && \
     echo "deb https://repo.download.nvidia.com/jetson/common r32.7 main" > /etc/apt/sources.list.d/jetson-common.list && \
@@ -22,8 +20,4 @@ RUN wget -qO - https://repo.download.nvidia.com/jetson/jetson-ota-public.asc | t
     apt-get install -y cuda-toolkit-10-2 libcublas10 libcublas-dev libcudnn8 libcudnn8-dev libnvinfer8 libnvinfer-dev && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /github/workspace
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
-
